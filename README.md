@@ -45,7 +45,9 @@ export default {
 
 ## todos
 
-add console messages like "generating proxy-directories"
+* add console messages like "generating proxy-directories"
+* write tests :)
+
 
 ## License
 
