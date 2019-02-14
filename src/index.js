@@ -9,18 +9,18 @@ export default function proxyDirectories(options = {}) {
     writeBundle() {
       if (!proxiesGenerated) {
         const createProxyPackage = module => `{
-					"name": "${packageName}/${module}",
-					"private": true,
-					"main": "../lib/${module}",
-					"module": "../es/${module}",
-					"types": "../ts/${module}"
-				}`;
+          "name": "${packageName}/${module}",
+          "private": true,
+          "main": "../lib/${module}",
+          "module": "../es/${module}",
+          "types": "../ts/${module}"
+        }`;
 
         const createDirPackage = dir => `{
-					"name": "${packageName}/${dir}",
-					"private": true,
-					"types": "../ts"
-				}`;
+          "name": "${packageName}/${dir}",
+          "private": true,
+          "types": "../ts"
+        }`;
 
         Object.entries(files)
           .filter(([module]) => module !== 'index')
