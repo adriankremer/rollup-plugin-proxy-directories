@@ -1,0 +1,52 @@
+{
+  "name": "rollup-plugin-proxy-directories",
+  "version": "0.2.0",
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.1",
+    "lint-staged": "^7.3.0",
+    "locate-character": "^2.0.5",
+    "mocha": "^5.2.0",
+    "prettier": "^1.14.3",
+    "rollup": "^0.66.4",
+    "rollup-plugin-buble": "^0.19.2",
+    "shx": "^0.3.2",
+    "source-map": "^0.7.3"
+  },
+  "main": "dist/rollup-plugin-proxy-directories.cjs.js",
+  "module": "dist/rollup-plugin-proxy-directories.es.js",
+  "dependencies": {
+    "minimatch": "^3.0.2"
+  },
+  "scripts": {
+    "test": "npm run test:only",
+    "test:only": "mocha",
+    "pretest": "npm run build",
+    "build": "rollup -c",
+    "prebuild": "shx rm -rf dist/*",
+    "lint": "prettier --write src/**/*.js test/test.js test/**/_config.js && eslint --fix src/**/*.js test/test.js test/**/_config.js",
+    "prepublishOnly": "npm run lint && npm run test:only",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
+  "repository": "adriankremer/rollup-plugin-proxy-directories",
+  "keywords": [
+    "rollup",
+    "rollup-plugin",
+    "es2015",
+    "npm",
+		"modules",
+		"proxy-directories"
+  ],
+  "author": "Adrian Kremer <a.kr3mer@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adriankremer/rollup-plugin-proxy-directories/issues"
+  },
+  "homepage": "https://github.com/adriankremer/rollup-plugin-proxy-directories#readme"
+}
