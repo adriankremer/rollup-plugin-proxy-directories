@@ -1,6 +1,9 @@
 # rollup-plugin-proxy-directories changelog
 
 ## 0.2.2
+* Optimized gitignore entries
+
+## 0.2.2
 * Updated gitignore entries to be absolute paths
 
 ## 0.2.1
