@@ -12,8 +12,8 @@ npm install --save-dev rollup-plugin-proxy-directories
 
 ```js
 // rollup.config.js
-import proxyDirectories from 'rollup-plugin-proxy-directories';
-import pkg from './package.json';
+import proxyDirectories from "rollup-plugin-proxy-directories";
+import pkg from "./package.json";
 
 export default {
   // ...
@@ -21,8 +21,9 @@ export default {
     proxyDirectories({
       packageName: pkg.name,
       files: {
-        moduleName: 'path/to/module'
-      }
+        moduleName: "path/to/module"
+      },
+      gitIgnore: true,
     })
   ]
 };
@@ -34,12 +35,15 @@ export default {
 {
   // the name of the library
   // this will result in the proxy packages e.g. packageName/module
-  packageName: 'name-of-the-library',
+  packageName: "name-of-the-library",
 
   // files object which represent modules you want to proxy
   files: {
     moduleName: "path/to/module",
   }
+
+  // generates or poulates a .gitignore file for the generated proxy-directories
+  ignoreFile: true,
 }
 ```
 

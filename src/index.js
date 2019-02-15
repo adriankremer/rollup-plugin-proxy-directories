@@ -23,7 +23,7 @@ const populateIgnoreFile = (fileName, modules) => {
 };
 
 export default function proxyDirectories(options = {}) {
-  const { packageName, files, ignoreFile } = options;
+  const { packageName, files, gitIgnore } = options;
   let proxiesGenerated = false;
   return {
     name: 'proxy-directories',
@@ -56,7 +56,7 @@ export default function proxyDirectories(options = {}) {
           writeFileSync(`${dir}/package.json`, createDirPackage(dir));
         });
 
-        ignoreFile && populateIgnoreFile(".gitignore", modules);
+        gitIgnore && populateIgnoreFile(".gitignore", modules);
 
         proxiesGenerated = true;
       }
