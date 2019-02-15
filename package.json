@@ -40,8 +40,8 @@
     "rollup-plugin",
     "es2015",
     "npm",
-		"modules",
-		"proxy-directories"
+    "modules",
+    "proxy-directories"
   ],
   "author": "Adrian Kremer <a.kr3mer@gmail.com>",
   "license": "MIT",
