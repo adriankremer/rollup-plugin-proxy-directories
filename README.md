@@ -1,6 +1,12 @@
 # rollup-plugin-proxy-directories
 
-creates proxy directories for libraries ..see [how-to-create-javascript-libraries-in-2018](https://developers.livechatinc.com/blog/how-to-create-javascript-libraries-in-2018-part-2/)
+creates proxy directories for libraries to make direct imports easier.
+
+## Example
+```js
+import Button from 'ui-library/button';
+```
+inspired by this article: [how-to-create-javascript-libraries-in-2018](https://developers.livechatinc.com/blog/how-to-create-javascript-libraries-in-2018-part-2/)
 
 ## Installation
 
@@ -21,7 +27,7 @@ export default {
     proxyDirectories({
       packageName: pkg.name,
       files: {
-        moduleName: "path/to/module"
+        button: "src/Button/index.ts"
       },
       gitIgnore: true,
     })
