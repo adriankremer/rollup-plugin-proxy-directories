@@ -1,16 +1,10 @@
-const {
-  writeFileSync,
-  mkdirSync,
-  readFileSync,
-  createWriteStream,
-  existsSync,
-} = require('fs');
+const { writeFileSync, mkdirSync, readFileSync, createWriteStream, existsSync } = require('fs');
 
 const populateIgnoreFile = (fileName, modules) => {
-  const ignoreFile = existsSync(fileName) && readFileSync(fileName, "utf-8");
+  const ignoreFile = existsSync(fileName) && readFileSync(fileName, 'utf-8');
   const stream = createWriteStream(fileName, { flags: 'a' });
   if (!ignoreFile) {
-    process.stdout.write(`💎 \x1b[35mCreating '${fileName}' with proxy directories.\x1b[0m\r\n`)
+    process.stdout.write(`💎 \x1b[35mCreating '${fileName}' with proxy directories.\x1b[0m\r\n`);
   } else {
     process.stdout.write(`💈 \x1b[35mUpdating '${fileName}' with proxy directories.\x1b[0m\r\n`);
   }
@@ -44,8 +38,7 @@ export default function proxyDirectories(options = {}) {
           "types": "../ts"
         }`;
 
-        const modules = Object.entries(files)
-          .filter(([module]) => module !== 'index');
+        const modules = Object.entries(files).filter(([module]) => module !== 'index');
 
         modules.forEach(([module]) => {
           mkdirSync(module);
@@ -56,7 +49,7 @@ export default function proxyDirectories(options = {}) {
           writeFileSync(`${dir}/package.json`, createDirPackage(dir));
         });
 
-        gitIgnore && populateIgnoreFile(".gitignore", modules);
+        gitIgnore && populateIgnoreFile('.gitignore', modules);
 
         proxiesGenerated = true;
       }
