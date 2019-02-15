@@ -10,7 +10,7 @@ const populateIgnoreFile = (fileName, modules) => {
   }
   modules.forEach(([module]) => {
     if (!ignoreFile || ignoreFile.indexOf(module) < 0) {
-      stream.write(`./${module}\r\n`);
+      stream.write(`/${module}/\r\n`);
     }
   });
   stream.end();
