@@ -5,27 +5,32 @@ const {
   existsSync,
   ensureDirSync,
   readdirSync,
-  lstatSync } = require('fs-extra');
-const { join, dirname } = require('path');
-const rimraf = require('rimraf');
+  lstatSync
+} = require("fs-extra");
+const { join, dirname } = require("path");
+const rimraf = require("rimraf");
 const cwd = process.cwd();
-const chalk = require('chalk');
-
+const chalk = require("chalk");
 
 function message(message, cssColor, bold) {
   process.stdout.write(
-    bold ? chalk.bold.keyword(cssColor)(message + '\r\n') : chalk.keyword(cssColor)(message + '\r\n')
+    bold
+      ? chalk.bold.keyword(cssColor)(message + "\r\n")
+      : chalk.keyword(cssColor)(message + "\r\n")
   );
 }
 
 function populateIgnoreFile(rootPath, fileName) {
   const buildFolders = getBuildFolders(rootPath);
-  const ignoreFile = existsSync(fileName) && readFileSync(fileName, 'utf-8');
-  const stream = createWriteStream(fileName, { flags: 'a' });
-  message(`\r\n💾  ${ignoreFile ? 'Updating' : 'Creating'} '${fileName}' with proxy directories.\r\n`, 'salmon');
+  const ignoreFile = existsSync(fileName) && readFileSync(fileName, "utf-8");
+  const stream = createWriteStream(fileName, { flags: "a" });
+  message(
+    `\r\n💾  ${ignoreFile ? "Updating" : "Creating"} '${fileName}' with proxy directories.\r\n`,
+    "salmon"
+  );
   buildFolders
     .filter(name => !/\//.test(name))
-    .forEach((folder) => {
+    .forEach(folder => {
       if (!ignoreFile || ignoreFile.indexOf(folder) < 0) {
         stream.write(`/${folder}/\r\n`);
       }
@@ -77,14 +82,14 @@ function getSourcePath(rootPath) {
 
 function getProxyPackageContents(rootPath, moduleName) {
   const { name } = getPackage(rootPath);
-  const mainDir = getBuildDir(rootPath, 'main');
-  const moduleDir = getBuildDir(rootPath, 'module');
-  const typesDir = getBuildDir(rootPath, 'types') || getBuildDir(rootPath, 'typings');
+  const mainDir = getBuildDir(rootPath, "main");
+  const moduleDir = getBuildDir(rootPath, "module");
+  const typesDir = getBuildDir(rootPath, "types") || getBuildDir(rootPath, "typings");
   const prefix = "../".repeat(moduleName.split("/").length);
   const packageJson = Object.assign(
     {
       name: `${name}/${moduleName}`,
-      private: true,
+      private: true
     },
     mainDir ? { main: join(prefix, mainDir, moduleName) } : {},
     moduleDir ? { module: join(prefix, moduleDir, moduleName) } : {},
@@ -100,8 +105,9 @@ function getPublicFiles(rootPath, prefix = "") {
       const path = join(rootPath, filename);
       const childFiles = isDirectory(path) && getPublicFiles(path, filename);
       return Object.assign(
-        childFiles || !isDirectoryName(path, filename) && { [ removeExt(join(prefix, filename))]: path },
-        acc,
+        childFiles ||
+          (!isDirectoryName(path, filename) && { [removeExt(join(prefix, filename))]: path }),
+        acc
       );
     }, {});
 }
@@ -115,48 +121,45 @@ function getProxyFolders(rootPath) {
 
 function getBuildFolders(rootPath) {
   return [
-    getBuildDir(rootPath, 'main'),
-    getBuildDir(rootPath, 'unpkg'),
-    getBuildDir(rootPath, 'module'),
-    ...getProxyFolders(rootPath),
+    getBuildDir(rootPath, "main"),
+    getBuildDir(rootPath, "unpkg"),
+    getBuildDir(rootPath, "module"),
+    ...getProxyFolders(rootPath)
   ].filter(Boolean);
 }
 
 function cleanBuild(rootPath) {
-  message(`\r\n🚽  Cleaning ${rootPath}`, 'salmon');
+  message(`\r\n🚽  Cleaning ${rootPath}`, "salmon");
   return getBuildFolders(rootPath)
     .filter(name => !/\//.test(name))
     .forEach(name => {
       try {
         rimraf.sync(name);
-        message(`- cleaned ${name}`, 'gray');
+        message(`- cleaned ${name}`, "gray");
       } catch (e) {
-        message(`Couldn't clean ${name}`, 'red');
+        message(`Couldn't clean ${name}`, "red");
       }
     });
 }
 
 function makeProxies(rootPath) {
-  message(`\r\n🎁  Making proxies in ${rootPath}`, 'salmon');
+  message(`\r\n🎁  Making proxies in ${rootPath}`, "salmon");
   return getProxyFolders(rootPath).forEach(name => {
     ensureDirSync(name);
-    writeFileSync(
-      `${name}/package.json`,
-      getProxyPackageContents(rootPath, name)
-    );
-    message(`- created ${name}`, 'gray');
+    writeFileSync(`${name}/package.json`, getProxyPackageContents(rootPath, name));
+    message(`- created ${name}`, "gray");
   });
 }
 
 export default function proxyDirectories() {
   return {
-    name: 'proxy-directories',
+    name: "proxy-directories",
 
     buildStart(options) {
       options.input = getPublicFiles(getSourcePath(cwd));
       cleanBuild(cwd);
       makeProxies(cwd);
-      populateIgnoreFile(cwd, '.gitignore');
+      populateIgnoreFile(cwd, ".gitignore");
     }
   };
 }
