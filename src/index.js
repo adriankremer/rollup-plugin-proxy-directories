@@ -110,9 +110,8 @@ function getPublicFiles(rootPath, prefix = "") {
       const childFiles = isDirectory(path) && getPublicFiles(path, filename);
       return Object.assign(
         childFiles ||
-          isPublicFile(filename) &&
-          !isDirectoryName(path, filename) &&
-          { [removeExt(join(prefix, filename))]: path },
+          (isPublicFile(filename) &&
+            !isDirectoryName(path, filename) && { [removeExt(join(prefix, filename))]: path }),
         acc
       );
     }, {});
