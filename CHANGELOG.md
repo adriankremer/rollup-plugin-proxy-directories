@@ -1,5 +1,8 @@
 # rollup-plugin-proxy-directories changelog
 
+## 1.1.0
+* Added checking of js / ts files for publicFile gathering
+
 ## 1.0.0
 * Added deep proxy traversal
 * Added buildDir resolving by package
