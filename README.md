@@ -15,25 +15,25 @@ creates proxy directories for libraries without configuration to make direct imp
 **Build**
 ```
 ├── Button
-│   ├── ButtonHooks
+│   ├── ButtonHook
 │   │   └── package.json
 │   └── package.json
 ├── es
 │   ├── Button
-│   │   ├── ButtonHooks.js
+│   │   ├── ButtonHook.js
 │   │   └── index.js
 │   ├── index.js
 ├── lib
 │   ├── Button
-│   │   ├── ButtonHooks.js
+│   │   ├── ButtonHook.js
 │   │   └── index.js
 │   ├── index.js
 ```
 
 **Usage**
 ```js
-import Button from 'ui-library/button';
-import ButtonHook from 'ui-library/button/buttonHook';
+import Button from 'ui-library/Button';
+import ButtonHook from 'ui-library/button/ButtonHook';
 ```
 inspired by this article: [how-to-create-javascript-libraries-in-2018](https://developers.livechatinc.com/blog/how-to-create-javascript-libraries-in-2018-part-2/)
 
