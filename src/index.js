@@ -66,6 +66,10 @@ function isPublicModule(path) {
   return !/^_/.test(path);
 }
 
+function isPublicFile(filename) {
+  return /\.(t|j)s/.test(filename);
+}
+
 function isDirectory(path) {
   return lstatSync(path).isDirectory();
 }
@@ -106,7 +110,9 @@ function getPublicFiles(rootPath, prefix = "") {
       const childFiles = isDirectory(path) && getPublicFiles(path, filename);
       return Object.assign(
         childFiles ||
-          (!isDirectoryName(path, filename) && { [removeExt(join(prefix, filename))]: path }),
+          isPublicFile(filename) &&
+          !isDirectoryName(path, filename) &&
+          { [removeExt(join(prefix, filename))]: path },
         acc
       );
     }, {});
