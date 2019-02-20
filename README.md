@@ -1,10 +1,39 @@
 # rollup-plugin-proxy-directories
 
-creates proxy directories for libraries to make direct imports easier.
+creates proxy directories for libraries without configuration to make direct imports easier.
 
 ## Example
+**Source**
+```
+├── Button
+│   ├── Button.tsx
+│   ├── ButtonHook.tsx
+│   └── index.ts
+├── index.ts
+```
+
+**Build**
+```
+├── Button
+│   ├── ButtonHooks
+│   │   └── package.json
+│   └── package.json
+├── es
+│   ├── Button
+│   │   ├── ButtonHooks.js
+│   │   └── index.js
+│   ├── index.js
+├── lib
+│   ├── Button
+│   │   ├── ButtonHooks.js
+│   │   └── index.js
+│   ├── index.js
+```
+
+**Usage**
 ```js
 import Button from 'ui-library/button';
+import ButtonHook from 'ui-library/button/buttonHook';
 ```
 inspired by this article: [how-to-create-javascript-libraries-in-2018](https://developers.livechatinc.com/blog/how-to-create-javascript-libraries-in-2018-part-2/)
 
@@ -24,38 +53,13 @@ import pkg from "./package.json";
 export default {
   // ...
   plugins: [
-    proxyDirectories({
-      packageName: pkg.name,
-      files: {
-        button: "src/Button/index.ts"
-      },
-      gitIgnore: true,
-    })
+    proxyDirectories()
   ]
 };
 ```
 
-## Options
+## todos (please contribute)
 
-```js
-{
-  // the name of the library
-  // this will result in the proxy packages e.g. packageName/module
-  packageName: "name-of-the-library",
-
-  // files object which represent modules you want to proxy
-  files: {
-    moduleName: "path/to/module",
-  }
-
-  // generates or poulates a .gitignore file for the generated proxy-directories
-  ignoreFile: true,
-}
-```
-
-## todos
-
-* add console messages like "generating proxy-directories"
 * write tests :)
 
 

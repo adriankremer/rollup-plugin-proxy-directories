@@ -17,7 +17,10 @@
   "main": "dist/rollup-plugin-proxy-directories.cjs.js",
   "module": "dist/rollup-plugin-proxy-directories.es.js",
   "dependencies": {
-    "minimatch": "^3.0.2"
+    "chalk": "^2.4.2",
+    "fs-extra": "^7.0.1",
+    "minimatch": "^3.0.2",
+    "rimraf": "^2.6.3"
   },
   "scripts": {
     "test": "npm run test:only",
