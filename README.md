@@ -33,7 +33,7 @@ creates proxy directories for libraries without configuration to make direct imp
 **Usage**
 ```js
 import Button from 'ui-library/Button';
-import ButtonHook from 'ui-library/button/ButtonHook';
+import ButtonHook from 'ui-library/Button/ButtonHook';
 ```
 inspired by this article: [how-to-create-javascript-libraries-in-2018](https://developers.livechatinc.com/blog/how-to-create-javascript-libraries-in-2018-part-2/)
 
