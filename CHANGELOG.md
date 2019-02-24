@@ -1,5 +1,14 @@
 # rollup-plugin-proxy-directories changelog
 
+## 1.1.3
+* Fix: merged custom inputs with proxy dir inputs, used options hook for compatibility
+
+## 1.1.2
+* chore updated readme
+
+## 1.1.1
+* chore: updated readme
+
 ## 1.1.0
 * Added checking of js / ts files for publicFile gathering
 
