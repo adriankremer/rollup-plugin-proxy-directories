@@ -159,9 +159,14 @@ function makeProxies(rootPath) {
 export default function proxyDirectories() {
   return {
     name: "proxy-directories",
-
-    buildStart(options) {
-      options.input = getPublicFiles(getSourcePath(cwd));
+    options(options) {
+      const mergedInputs = [
+        ...(typeof options.input === "object" ? Object.values(options.input): options.input),
+        ...Object.values(getPublicFiles(getSourcePath(cwd)))
+      ];
+      options.input = mergedInputs.filter(entry => mergedInputs.indexOf(entry) === -1);
+    },
+    buildStart() {
       cleanBuild(cwd);
       makeProxies(cwd);
       populateIgnoreFile(cwd, ".gitignore");
