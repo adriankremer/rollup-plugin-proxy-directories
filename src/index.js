@@ -161,7 +161,7 @@ export default function proxyDirectories() {
     name: "proxy-directories",
     options(options) {
       const mergedInputs = [
-        ...(typeof options.input === "object" ? Object.values(options.input): options.input),
+        ...(typeof options.input === "object" ? Object.values(options.input) : options.input),
         ...Object.values(getPublicFiles(getSourcePath(cwd)))
       ];
       options.input = mergedInputs.filter(entry => mergedInputs.indexOf(entry) === -1);
