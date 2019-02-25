@@ -160,8 +160,7 @@ export default function proxyDirectories() {
   return {
     name: "proxy-directories",
     options(options) {
-      if (options.input.length === 0)
-        options.input = getPublicFiles(getSourcePath(cwd));
+      if (options.input.length === 0) options.input = getPublicFiles(getSourcePath(cwd));
     },
     buildStart() {
       cleanBuild(cwd);

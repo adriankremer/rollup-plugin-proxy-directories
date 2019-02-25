@@ -1,6 +1,6 @@
 # rollup-plugin-proxy-directories changelog
 
-## 1.1.4
+## 1.2.0
 * Made publicFiles now only apply if empty input is provided
 
 ## 1.1.3
