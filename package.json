@@ -18,7 +18,7 @@
   "module": "dist/rollup-plugin-proxy-directories.es.js",
   "dependencies": {
     "chalk": "^2.4.2",
-    "fs-extra": "^7.0.1",
+    "fs-extra": "^8.0.0",
     "minimatch": "^3.0.2",
     "rimraf": "^2.6.3"
   },
